@@ -1,4 +1,3 @@
-````markdown
 # liscap
 
 ## Description
@@ -12,11 +11,11 @@ To use **liscap**, you can add the script to the top of your html file:
 ```html
 <script src="https://liscap.vercel.app/liscap.min.js"></script>
 ```
-````
 
 ### Example
 
 ```javascript
+// app.js
 // liscap is available globally
 
 // Select an element
