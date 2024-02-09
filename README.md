@@ -70,8 +70,8 @@ element.addEventListener("click", () => console.log("Clicked")); // Error: Max l
 | callback | EventListenerOrEventListenerObject | Callback function      |
 | options  | Object                             | Event listener options |
 
-- **Returns**: the number of listeners
-- **Type**: Number
+- **Returns**: void or throws error
+- **Type**: void | Error
 
 #### sayHello() → {void}
 

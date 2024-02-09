@@ -67,7 +67,7 @@ var liscap = new (class liscap {
    * @param {String} type - Event type
    * @param {EventListenerOrEventListenerObject} callback - Callback function
    * @param {Object} options - Event listener options
-   * @returns {Number} - Returns the number of listeners
+   * @returns {void | Error} - Returns void or throws an error
    */
   removeEventListener(element, type, callback, options) {
     if (this.end) {
@@ -75,13 +75,6 @@ var liscap = new (class liscap {
     }
 
     element.removeEventListener(type, callback, options);
-    this.maxListeners[element]--;
-
-    if (this.maxListeners[element] < 0) {
-      this.maxListeners[element] = 0;
-    }
-
-    return this.maxListeners[element];
   }
 
   /**
