@@ -1,0 +1,24 @@
+{
+  "name": "liscap",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/benhexie/liscap.git",
+  "author": "Benedict Gabriel <benedictgabriel73@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn build && node src/index.js",
+    "dev": "nodemon src/index.js",
+    "doc": "jsdoc -c jsdoc.json",
+    "build": "webpack --config webpack.config.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jsdoc": "^4.0.2",
+    "nodemon": "^3.0.3",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
