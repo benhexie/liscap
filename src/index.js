@@ -7,7 +7,7 @@ app.use(cors());
 
 async function main() {
   app.get("/", (req, res) => {
-    res.sendFile("Hello from liscap");
+    res.send("Hello from liscap");
   });
 
   app.get("/liscap.min.js", (req, res) => {
