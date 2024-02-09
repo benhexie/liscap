@@ -89,7 +89,7 @@ element.addEventListener("click", () => console.log("Clicked")); // Error: Max l
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](src/lib/liscap.min.js.LICENSE.txt) file for details.
+This project is licensed under the MIT License. See the [LICENSE](src/dist/liscap.min.js.LICENSE.txt) file for details.
 
 ## Source
 
