@@ -14,7 +14,7 @@ async function main() {
     res.sendFile(__dirname + "/dist/liscap.min.js");
   });
 
-  app.get("*", (req, res) => {
+  app.all("*", (_, res) => {
     res.redirect("/");
   });
 
