@@ -4,10 +4,24 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
-app.get("/liscap.min.js", (req, res) => {
-  res.sendFile(__dirname + "/dist/liscap.min.js");
-});
+async function main() {
+  app.get("/", (req, res) => {
+    res.sendFile("Hello from liscap");
+  });
 
-const listener = app.listen(8080, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+  app.get("/liscap.min.js", (req, res) => {
+    res.sendFile(__dirname + "/dist/liscap.min.js");
+  });
+
+  app.get("*", (req, res) => {
+    res.redirect("/");
+  });
+
+  const listener = app.listen(process.env.PORT || 80, () => {
+    console.log("Your app is listening on port " + listener.address().port);
+  });
+}
+
+main().catch((err) => {
+  console.error(err.message);
 });
