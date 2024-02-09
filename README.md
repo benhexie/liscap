@@ -45,7 +45,7 @@ element.addEventListener("click", () => console.log("Clicked")); // Error: Max l
 
 | Name     | Type                               | Description            |
 | -------- | ---------------------------------- | ---------------------- |
-| element  | HTMLElement                        | DOM element            |
+| element  | HTMLElement or Window or Document  | DOM element            |
 | type     | String                             | Event type             |
 | callback | EventListenerOrEventListenerObject | Callback function      |
 | options  | Object                             | Event listener options |
@@ -65,7 +65,7 @@ element.addEventListener("click", () => console.log("Clicked")); // Error: Max l
 
 | Name     | Type                               | Description            |
 | -------- | ---------------------------------- | ---------------------- |
-| element  | HTMLElement                        | DOM element            |
+| element  | HTMLElement or Window or Document  | DOM element            |
 | type     | String                             | Event type             |
 | callback | EventListenerOrEventListenerObject | Callback function      |
 | options  | Object                             | Event listener options |

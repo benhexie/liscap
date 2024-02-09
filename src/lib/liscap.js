@@ -23,28 +23,34 @@
  */
 var liscap = new (class liscap {
   constructor() {
-    this.maxListeners = {};
-    this.end = false;
+    this._maxListeners = {};
+    this._lock = false;
   }
 
   /**
    * addEventListener - Add an event listener to an element and limit the number of listeners on the element
-   * @param {HTMLElement} element - DOM element
+   * @param {HTMLElement | Window | Document} element - DOM element
    * @param {String} type - Event type
    * @param {EventListenerOrEventListenerObject} callback - Callback function
    * @param {Object} options - Event listener options
    * @returns {void | Error} - Returns void or throws an error
    */
   addEventListener(element, type, callback = () => {}, options = {}) {
-    if (!(element instanceof HTMLElement)) {
+    if (
+      !(
+        element instanceof HTMLElement ||
+        element instanceof Window ||
+        element instanceof Document
+      )
+    ) {
       throw new Error("Invalid element");
     }
 
-    if (this.end) {
+    if (this._lock) {
       throw new Error("You cannot add more listeners");
     }
 
-    this.maxListeners[element] = (this.maxListeners[element] || 0) + 1;
+    this._maxListeners[element] = (this._maxListeners[element] || 0) + 1;
 
     element.addEventListener = (function (maxListeners) {
       let count = 0;
@@ -56,22 +62,32 @@ var liscap = new (class liscap {
         count++;
         original.call(this, type, listener, options);
       };
-    })(this.maxListeners);
+    })(this._maxListeners);
 
     element.addEventListener(type, callback, options);
   }
 
   /**
    * removeEventListener - Remove an event listener from an element and decreases the number of listeners on the element
-   * @param {HTMLElement} element - DOM element
+   * @param {HTMLElement | Window | Document} element - DOM element
    * @param {String} type - Event type
    * @param {EventListenerOrEventListenerObject} callback - Callback function
    * @param {Object} options - Event listener options
    * @returns {void | Error} - Returns void or throws an error
    */
-  removeEventListener(element, type, callback, options) {
-    if (this.end) {
+  removeEventListener(element, type, callback, options = {}) {
+    if (this._lock) {
       throw new Error("You cannot remove more listeners");
+    }
+
+    if (
+      !(
+        element instanceof HTMLElement ||
+        element instanceof Window ||
+        element instanceof Document
+      )
+    ) {
+      throw new Error("Invalid element");
     }
 
     element.removeEventListener(type, callback, options);
@@ -83,7 +99,28 @@ var liscap = new (class liscap {
    * @returns {void}
    */
   lock() {
-    this.end = true;
+    (() => {
+      [
+        window,
+        document,
+        document.documentElement,
+        document.body,
+        document.head,
+      ].forEach((element) => {
+        if (element)
+          // @ts-ignore
+          this.addEventListener(element, "custom", () => {});
+      });
+
+      ["button", "input", "select", "textarea", "form"].forEach((tag) => {
+        document.querySelectorAll(tag)?.forEach((element) => {
+          if (element)
+            // @ts-ignore
+            this.addEventListener(element, "custom", () => {});
+        });
+      });
+    })();
+    this._lock = true;
   }
 
   /**
