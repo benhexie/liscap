@@ -6,7 +6,7 @@
 
 ## Usage
 
-To use **liscap**, you can add the script to the top of your html file:
+To use **liscap**, you can add the script to the head of your html file:
 
 ```html
 <script src="https://liscap.vercel.app/liscap.min.js"></script>
