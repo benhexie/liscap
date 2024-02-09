@@ -1,5 +1,7 @@
 /node_modules
 /docs
+
+# Removed dist from gitignore to allow for deployment on Vercel
 # dist/
 
 .vscode
