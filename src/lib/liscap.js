@@ -121,6 +121,7 @@ var liscap = new (class liscap {
       });
     })();
     this._lock = true;
+    Object.freeze(this);
   }
 
   /**
